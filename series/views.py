@@ -4,7 +4,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from series.models import Serie
 from series.serializers import SerieSerializer
-from model import predict
+#from series import model
 
 
 class JSONResponse(HttpResponse):
@@ -51,4 +51,5 @@ def serie_detail(request, pk):
 
 @csrf_exempt
 def modelPredict(request):
-    return predict("que video la vida parce.")
+    return "Hola"
+    #return model.predict("Que visaje la vida parce....")
