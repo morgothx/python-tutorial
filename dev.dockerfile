@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 # Python install
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
+RUN python -m spacy download es_core_news_sm
 
 # Expose port to server
 EXPOSE 8000

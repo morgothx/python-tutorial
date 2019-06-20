@@ -1,10 +1,11 @@
+from series import model
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from series.models import Serie
 from series.serializers import SerieSerializer
-#from series import model
+
 
 
 class JSONResponse(HttpResponse):
@@ -51,5 +52,5 @@ def serie_detail(request, pk):
 
 @csrf_exempt
 def modelPredict(request):
-    return "Hola"
-    #return model.predict("Que visaje la vida parce....")
+    #return "Hola"
+    return model.predict("Que visaje la vida parce....")

@@ -1,15 +1,18 @@
+from __future__ import absolute_import, division, print_function, unicode_literals
 from gensim.corpora import Dictionary
+from tensorflow import keras
+
+
 dictionary = Dictionary.load_from_text('diccionario_gensim.txt')
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+
+
 import spacy
 import tensorflow as tf
 import keras
 
 import tensorflow as tf
-from tensorflow import keras
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import os
 
@@ -32,38 +35,36 @@ def procesarString (s, s2):
     return train_data
 
 nlp = spacy.load("es_core_news_sm")
-x= procesarString(s, s2)
-for y in x:
-    for i in range(1024):
-        if y[i]==-1:
-            y[i]= 2
+#x= procesarString(s, s2)
+#for y in x:
+#    for i in range(1024):
+#        if y[i]==-1:
+#            y[i]= 2
 
 
 def create_model( ):
-
     m = keras.Sequential()
     m.add(keras.layers.Embedding(len (dictionary), 16))
     m.add(keras.layers.GlobalAveragePooling1D())
     m.add(keras.layers.Dense(16, activation=tf.nn.relu))
-    m.add(keras.layers.Flatten(input_shape=(1024,)))
-
+    m.add(keras.layers.Flatten(input_shape=(1024, )))
     m.add(keras.layers.Dense(25, activation='softmax'))
     m.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['acc'])
     return m
 
-model2 = create_model()
-import os
-checkpoint_path = "training_1/cp.ckpt"
-checkpoint_dir = os.path.dirname(checkpoint_path)
-model2.load_weights(checkpoint_path)
+#model2 = create_model()
+#import os
+#checkpoint_path = "training_1/cp.ckpt"
+#checkpoint_dir = os.path.dirname(checkpoint_path)
+#model2.load_weights(checkpoint_path)
 
-tags = ['Kit Cocina', 'Gastos notariales y de documentación', 'Prorroga Alojamiento temporal - Arriendo', 'Kit Dormitorio', 'Gastos de atención en salud', 'Egreso de hotel', 'Visitas para arrendamiento', 'Unidades de redención Alimentación - Aseo', 'Vestuario', 'Servicios funerarios', 'Kit de vivienda saludable ', 'Transporte emergencia', 'Remisión albergue', 'Remision de hotel', 'Orientación oferta distrital', 'Arriendo', 'Prórroga de hotel', 'Alojamiento temporal - Arriendo', 'Remisión Alojamiento temporal - Albergue', 'Prórroga de arriendo', 'Egreso Alojamiento temporal - Albergue', 'Transporte intraUrbano', 'Transporte', 'Kit Vajilla', 'Kit de aseo personal']
+#tags = ['Kit Cocina', 'Gastos notariales y de documentación', 'Prorroga Alojamiento temporal - Arriendo', 'Kit Dormitorio', 'Gastos de atención en salud', 'Egreso de hotel', 'Visitas para arrendamiento', 'Unidades de redención Alimentación - Aseo', 'Vestuario', 'Servicios funerarios', 'Kit de vivienda saludable ', 'Transporte emergencia', 'Remisión albergue', 'Remision de hotel', 'Orientación oferta distrital', 'Arriendo', 'Prórroga de hotel', 'Alojamiento temporal - Arriendo', 'Remisión Alojamiento temporal - Albergue', 'Prórroga de arriendo', 'Egreso Alojamiento temporal - Albergue', 'Transporte intraUrbano', 'Transporte', 'Kit Vajilla', 'Kit de aseo personal']
 
-prediction = model2.predict(x[:1])
-for index, num in enumerate ( prediction[0]):
-    print(num, tags[index])
+#prediction = model2.predict(x[:1])
+#for index, num in enumerate ( prediction[0]):
+#    print(num, tags[index])
 
 
 def predict(text):
@@ -73,6 +74,14 @@ def predict(text):
     checkpoint_path = "training_1/cp.ckpt"
     checkpoint_dir = os.path.dirname(checkpoint_path)
     model2.load_weights(checkpoint_path)
+    tags = ['Kit Cocina', 'Gastos notariales y de documentación', 'Prorroga Alojamiento temporal - Arriendo',
+            'Kit Dormitorio', 'Gastos de atención en salud', 'Egreso de hotel', 'Visitas para arrendamiento',
+            'Unidades de redención Alimentación - Aseo', 'Vestuario', 'Servicios funerarios',
+            'Kit de vivienda saludable ', 'Transporte emergencia', 'Remisión albergue', 'Remision de hotel',
+            'Orientación oferta distrital', 'Arriendo', 'Prórroga de hotel', 'Alojamiento temporal - Arriendo',
+            'Remisión Alojamiento temporal - Albergue', 'Prórroga de arriendo',
+            'Egreso Alojamiento temporal - Albergue', 'Transporte intraUrbano', 'Transporte', 'Kit Vajilla',
+            'Kit de aseo personal']
     prediction = model2.predict(x[:1])
     ordered =  ( [(prediction[i], tags[i]) for i in range(len(prediction))])
     return ordered.Take(3)
