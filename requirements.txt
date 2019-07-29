@@ -6,4 +6,4 @@ spacy==2.0.16
 Keras==2.2.4
 pandas==0.24.2
 numpy==1.16.4
-
+psycopg2

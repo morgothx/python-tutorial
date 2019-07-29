@@ -54,3 +54,8 @@ def serie_detail(request, pk):
 def modelPredict(request):
     #return "Hola"
     return model.predict("Que visaje la vida parce....")
+
+
+@csrf_exempt
+def getFilters()
+
