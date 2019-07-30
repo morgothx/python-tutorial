@@ -1,5 +1,17 @@
 version: '3.7'
 services:
+  pgsql:
+    image: postgres:latest
+    hostname: pgsql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./data:/var/lib/postgresql/data/pgdata"
+      - "./docker-entrypoint-initdb.d/database.sql:/docker-entrypoint-initdb.d/database.sql"
   develop:
     image: docker-python:develop
     container_name: docker-python-develop
@@ -13,16 +25,9 @@ services:
     stdin_open: true
     tty: true
     command: "python manage.py runserver 0.0.0.0:8000"
-  postgres:
-    image: postgres:latest
-    hostname: pgsql
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - PGDATA=/var/lib/postgresql/data/pgdata
-    ports:
-      - "5432:5432"
-    volumes:
-      - "/home/docker/data:/data"
+    depends_on:
+      - pgsql
+
+
 
 

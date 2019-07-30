@@ -56,6 +56,6 @@ def modelPredict(request):
     return model.predict("Que visaje la vida parce....")
 
 
-@csrf_exempt
-def getFilters()
+#@csrf_exempt
+#def getFilters()
 

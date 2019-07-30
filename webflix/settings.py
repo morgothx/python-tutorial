@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'series',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'pgsql',
         'PORT': '5432'
     }
 }
