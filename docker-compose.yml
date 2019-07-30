@@ -12,6 +12,13 @@ services:
     volumes:
       - "./data:/var/lib/postgresql/data/pgdata"
       - "./docker-entrypoint-initdb.d/database.sql:/docker-entrypoint-initdb.d/database.sql"
+  migration:
+    image: docker-python:develop
+    command: bash -c "python manage.py makemigrations && python manage.py migrate --noinput"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - pgsql
   develop:
     image: docker-python:develop
     container_name: docker-python-develop
@@ -27,6 +34,8 @@ services:
     command: "python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - pgsql
+      - migration
+
 
 
 
