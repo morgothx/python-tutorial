@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "99810b5d-2b8b-41c3-9944-46408b4d6746",
+		"_postman_id": "06b9dd9d-1efd-44c4-b55d-6dd8006acf8e",
 		"name": "Python Tutorial",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -75,6 +75,30 @@
 				"url": {
 					"raw": ""
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/series/getFilters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/series/getFilters",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"series",
+						"getFilters"
+					]
+				},
+				"description": "Obtener datos para los filtros en el front"
 			},
 			"response": []
 		}
