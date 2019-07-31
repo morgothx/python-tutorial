@@ -5,7 +5,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from series.models import Serie
 from series.serializers import SerieSerializer
-
+from series.serializers import EthnicsSerializer
+from .models import Ethnics
 
 
 class JSONResponse(HttpResponse):
@@ -56,6 +57,13 @@ def modelPredict(request):
     return model.predict("Que visaje la vida parce....")
 
 
-#@csrf_exempt
-#def getFilters()
+@csrf_exempt
+def getFilters(request):
+    try:
+        ethnics = Ethnics.objects.all()
+    except Ethnics.DoesNotExist:
+        return HttpResponse(status=404)
+
+    serializer = EthnicsSerializer(ethnics, many=True)
+    return JSONResponse(serializer.data)
 
