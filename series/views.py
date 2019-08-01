@@ -6,8 +6,11 @@ from rest_framework.parsers import JSONParser
 from series.models import Serie
 from series.serializers import SerieSerializer
 from series.serializers import EthnicsSerializer
+from series.serializers import ServicesSerializer
+from series.serializers import FiltersSerializer
 from .models import Ethnic
-
+from .models import Service
+import json
 
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
@@ -61,9 +64,12 @@ def modelPredict(request):
 def getFilters(request):
     try:
         ethnics = Ethnic.objects.all()
+        services = Service.objects.all()
     except Ethnic.DoesNotExist:
         return HttpResponse(status=404)
 
-    serializer = EthnicsSerializer(ethnics, many=True)
-    return JSONResponse(serializer.data)
+    servicesResponse = ServicesSerializer(services, many=True)
+    ethnicsResponse = EthnicsSerializer(ethnics, many=True)
 
+    response = { 'ethnics': ethnicsResponse.data, 'services': servicesResponse.data }
+    return JSONResponse(response)
