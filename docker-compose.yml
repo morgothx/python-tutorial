@@ -17,7 +17,8 @@ services:
     command: bash -c "python manage.py makemigrations && python manage.py migrate --noinput"
     volumes:
       - .:/usr/src/app
-    stdin_open: true
+    depends_on:
+      - pgsql
   develop:
     image: docker-python:develop
     container_name: docker-python-develop

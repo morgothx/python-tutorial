@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Serie
-from .models import Ethnics
+from .models import Ethnic
 
 class SerieSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,5 +9,5 @@ class SerieSerializer(serializers.ModelSerializer):
 
 class EthnicsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ethnics
+        model = Ethnic
         fields = ('id', 'name', 'description')

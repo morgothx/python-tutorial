@@ -6,7 +6,7 @@ from rest_framework.parsers import JSONParser
 from series.models import Serie
 from series.serializers import SerieSerializer
 from series.serializers import EthnicsSerializer
-from .models import Ethnics
+from .models import Ethnic
 
 
 class JSONResponse(HttpResponse):
@@ -60,8 +60,8 @@ def modelPredict(request):
 @csrf_exempt
 def getFilters(request):
     try:
-        ethnics = Ethnics.objects.all()
-    except Ethnics.DoesNotExist:
+        ethnics = Ethnic.objects.all()
+    except Ethnic.DoesNotExist:
         return HttpResponse(status=404)
 
     serializer = EthnicsSerializer(ethnics, many=True)

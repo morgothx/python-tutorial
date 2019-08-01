@@ -18,6 +18,11 @@ class Serie(models.Model):
     rating = models.IntegerField(default=0)
     category = models.CharField(max_length=10, choices=CATEGORIES_CHOICES)
 
-class Ethnics(models.Model):
+class Ethnic(models.Model):
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=500)
+
+class Service(models.Model):
+    name = models.CharField(max_length=250)
+    description = models.CharField(max_length=500)
+    type = models.CharField(max_length=250)
