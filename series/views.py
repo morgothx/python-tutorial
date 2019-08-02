@@ -10,7 +10,9 @@ from series.serializers import ServicesSerializer
 from series.serializers import FiltersSerializer
 from .models import Ethnic
 from .models import Service
+import random
 import json
+import logging
 
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
@@ -73,3 +75,18 @@ def getFilters(request):
 
     response = { 'ethnics': ethnicsResponse.data, 'services': servicesResponse.data }
     return JSONResponse(response)
+
+@csrf_exempt
+def getEthnicsByService(request):
+    try:
+        ethnics = Ethnic.objects.all()
+    except Ethnic.DoesNotExist:
+        return HttpResponse(status=404)
+    response = {}
+    eth = list(ethnics)
+
+    for ethnic in eth:
+        response.update({ethnic.name: random.randint(100,1000)})
+
+    return JSONResponse(response)
+
