@@ -12,9 +12,10 @@ services:
     volumes:
       - "./data:/var/lib/postgresql/data/pgdata"
       - "./docker-entrypoint-initdb.d/database.sql:/docker-entrypoint-initdb.d/database.sql"
+      - "./docker-entrypoint-initdb.d/version_1.sql:/docker-entrypoint-initdb.d/version_1.sql"
   migration:
     image: docker-python:develop
-    command: bash -c "python manage.py makemigrations && python manage.py migrate --noinput"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate --noinput &&  psql -U postgres postgres < /docker-entrypoint-initdb.d/version_1.sql"
     volumes:
       - .:/usr/src/app
     depends_on:
