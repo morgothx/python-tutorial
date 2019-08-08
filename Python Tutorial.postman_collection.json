@@ -101,6 +101,47 @@
 				"description": "Obtener datos para los filtros en el front"
 			},
 			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/series/getEthnicsByService",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "serviceId",
+							"value": "1",
+							"description": "Id del servicio a consultar",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/series/getEthnicsByService?serviceId",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"series",
+						"getEthnicsByService"
+					],
+					"query": [
+						{
+							"key": "serviceId",
+							"value": ""
+						}
+					]
+				},
+				"description": "Obtener contadores de etnia x servicio"
+			},
+			"response": []
 		}
 	]
 }
