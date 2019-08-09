@@ -1,0 +1,40 @@
+[
+    {
+        "model": "series.ethnic",
+        "pk": 1,
+        "fields":
+        {
+            "name": "Raizal",
+            "description": "Raizal",
+        },
+    },
+    {
+        "model": "series.ethnic",
+        "pk": 2,
+        "fields":
+        {
+            "name": "Rom",
+            "description": "Rom o gitana",
+        },
+    },
+    {
+        "model": "series.service",
+        "pk": 1,
+        "fields":
+        {
+            "name": "algo",
+            "description": "algo",
+            "type": "lafo",
+        },
+    },
+    {
+        "model": "series.service",
+        "pk": 2,
+        "fields":
+        {
+            "name": "otro",
+            "description": "otro",
+            "type": "otro",
+        },
+    }
+]
